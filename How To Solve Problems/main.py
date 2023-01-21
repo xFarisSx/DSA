@@ -39,15 +39,17 @@ arr2 = ['z', 'y', 'x']
 
 # print(containsCommon(arr1,arr2)) # O(a + b) Time Complexity O(a) Space Complexity
 
-def hasPairWithSum(arr, sum):
-	for i in range(len(arr)):
-		for j in range(i+1, len(arr)):
-			if arr[i] + arr[j] == sum:
-				return True
-	return False
+# Naive
+# def hasPairWithSum(arr, sum):
+# 	for i in range(len(arr)):
+# 		for j in range(i+1, len(arr)):
+# 			if arr[i] + arr[j] == sum:
+# 				return True
+# 	return False
 
-print(hasPairWithSum([6,4,3,2,1,7], 10))
+# print(hasPairWithSum([6,4,3,2,1,7], 10))
 
+# Better
 # def hasPairWithSum2(arr, sum):
 # 	mySet = set()
 # 	for i in arr:
