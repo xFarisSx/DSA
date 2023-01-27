@@ -18,45 +18,45 @@
 
 # Implement Hash Table
 
-# class HashTable:
-# 	def __init__(self, size , **kargs):
-# 		self.data = [[]] * size
-# 		for arg in kargs.items():
-# 			self.set(arg[0], arg[1])
+class HashTable:
+	def __init__(self, size , **kargs):
+		self.data = [[]] * size
+		for arg in kargs.items():
+			self.set(arg[0], arg[1])
 		
-# 	def _hash(self, key):
-# 		hash = 0
-# 		for i in range(0, len(key)):
-# 			hash = (hash + ord(key[i]) * i) % len(self.data)
+	def _hash(self, key):
+		hash = 0
+		for i in range(0, len(key)):
+			hash = (hash + ord(key[i]) * i) % len(self.data)
 
-# 		return hash
+		return hash
 
-# 	def set(self, key, value):
-# 		address = self._hash(key)
-# 		if(not self.data[address]):
-# 			self.data[address] = []
-# 			self.data[address].append([key, value])
+	def set(self, key, value):
+		address = self._hash(key)
+		if(not self.data[address]):
+			self.data[address] = []
+		self.data[address].append([key, value])
 		
-# 		return self.data
+		return self.data
 
-# 	def get(self, key):
+	def get(self, key):
 
-# 		currentBucket = self.data[self._hash(key)]
-# 		for el in currentBucket:
-# 			if el[0] == key:
-# 				return el[1] # O(1|n)
+		currentBucket = self.data[self._hash(key)]
+		for el in currentBucket:
+			if el[0] == key:
+				return el[1] # O(1|n)
 
-# 	def keys(self):
-# 		keysAr = []
-# 		for key in map(lambda y: y[0][0],filter(lambda x: x != [], self.data)):
-# 			keysAr.append(key)
+	def keys(self):
+		keysAr = []
+		for key in map(lambda y: y[0][0],filter(lambda x: x != [], self.data)):
+			keysAr.append(key)
 
-# 		return keysAr
+		return keysAr
 
-# myHashTable = HashTable(10, grapes = 10000, fruits = 20000)
-# print(myHashTable.get('grapes'))
-# print(myHashTable.data)
-# print(myHashTable.keys())
+myHashTable = HashTable(10, grapes = 10000, fruits = 20000)
+print(myHashTable.get('grapes'))
+print(myHashTable.data)
+print(myHashTable.keys())
 
 # Google Question
 # def findFirstRepeat(arr):
