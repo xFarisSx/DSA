@@ -31,17 +31,23 @@ class Stack:
 			self.bottom = Node(value).__dict__
 			self.top = self.bottom.copy()
 		else:
-			pastTop = self.top.copy()
-			self.top['next'] = pastTop
+			holdingPointer = self.top.copy()
+			self.top['next'] = holdingPointer
 			self.top['value'] = value
 
 		self.length+=1
 
-		
+		return self.__str__()
 
 	def pop(self):
-		self.top = self.top['next']
+		if not self.top: return None
+		if self.top == self.bottom:
+			self.bottom = None
+		holdinPointer = self.top.copy()
+		self.top = holdinPointer['next']
 		self.length -= 1
+
+		return holdinPointer
 
 	def __str__(self):
 		return f'{self.top}'
@@ -49,6 +55,9 @@ class Stack:
 myStack = Stack()
 myStack.push('Google')
 myStack.push('Udemy')
-myStack.push('Discord')
-myStack.pop()
+print(myStack.push('Discord'))
+print(myStack.pop())
+print(myStack.pop())
+print(myStack.pop())
+print(myStack)
 print(myStack.peek())
