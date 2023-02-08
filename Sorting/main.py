@@ -106,30 +106,61 @@ Quick
 # print(InsertionSort(numbers))
 
 # Merge Sort O(n log n)
-numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0]
-def mergeSort(arr):
-	if len(arr) == 1:
-		return arr
+# numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0]
+# def mergeSort(arr):
+# 	if len(arr) == 1:
+# 		return arr
 
-	left = arr[:math.floor(len(arr)/2)]
-	right = arr[math.floor(len(arr)/2):]
+# 	left = arr[:math.floor(len(arr)/2)]
+# 	right = arr[math.floor(len(arr)/2):]
 
-	return merge(mergeSort(left), mergeSort(right))
+# 	return merge(mergeSort(left), mergeSort(right))
 
-def merge(left, right):
-	newArr = []
-	leftI = 0
-	rightI = 0
-	while leftI < len(left) and rightI < len(right):
-		if left[leftI] < right[rightI]:
-			newArr.append(left[leftI])
-			leftI+=1
-		else:
-			newArr.append(right[rightI])
-			rightI+=1
+# def merge(left, right):
+# 	newArr = []
+# 	leftI = 0
+# 	rightI = 0
+# 	while leftI < len(left) and rightI < len(right):
+# 		if left[leftI] < right[rightI]:
+# 			newArr.append(left[leftI])
+# 			leftI+=1
+# 		else:
+# 			newArr.append(right[rightI])
+# 			rightI+=1
 
-	return newArr + left[leftI:] + right[rightI:]
+# 	return newArr + left[leftI:] + right[rightI:]
 
-answer = mergeSort(numbers)
-print(answer)
-print(numbers)
+# answer = mergeSort(numbers)
+# print(answer)
+
+# Quick Sort O(n log n) Better
+numbers = [10, 16, 8, 12, 15,6, 3, 9, 5]
+arr = numbers
+def partition(l, h):
+	global arr
+	pivot = arr[l]
+	i = l
+	j = h
+	while i < j:
+		i+=1
+		if i<j:
+			while arr[i] <= pivot:
+				i+=1
+		j-=1
+		while arr[j] > pivot:
+			j-=1
+		if i<j:
+			arr[i], arr[j] = arr[j], arr[i]
+
+	arr[l], arr[j] = arr[j], arr[l]	
+	return j
+def quickSort(l, h):
+	global arr
+	if l < h:
+		j = partition(l, h)
+		quickSort(l, j)
+		quickSort(j+1, h)
+
+	return arr
+
+print(quickSort(0, len(arr)))
