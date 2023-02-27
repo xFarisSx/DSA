@@ -2,6 +2,9 @@
       9
   4      20
 1   6  15  170  
+InOrder - [1, 4, 6, 9,15,20, 170]
+PreOrder - [9, 4, 1, 6, 20, 15, 170]
+PostOrder - [1, 6, 4, 15, 170, 20, 9]
 """
 import json
 def traverse(node):
@@ -118,8 +121,76 @@ class BinarySearchTree:
                                 parentNode = subNode
                                 subNode = subNode['left']
 
+    def BFS(self):
+        currentNode = self.root
+        arr = []
+        queue = []
+        queue.append(currentNode)
+
+        while len(queue) > 0:
+            currentNode = queue.pop(0)
+            arr.append(currentNode['value'])
+            if currentNode['left']:
+                queue.append(currentNode['left'])
+            if currentNode['right']:
+                queue.append(currentNode['right'])
+
+        return arr
+
+    def BFSR(self, queue, list):
+        if len(queue) == 0:
+            return list
+        currentNode = queue.pop(0)
+        list.append(currentNode['value'])
+        if currentNode['left']:
+            queue.append(currentNode['left'])
+        if currentNode['right']:
+            queue.append(currentNode['right'])
+
+        return self.BFSR(queue, list)
+
+    def DFSInOrder(self):
+        return traverseInOrder(self.root, [])
+
+    def DFSPreOrder(self):
+        return traversePreOrder(self.root, [])
+
+
+    def DFSPostOrder(self):
+        return traversePostOrder(self.root, [])
+        
+
     def __str__(self):
         return f"{self.root}"
+
+def traverseInOrder(node, arr):
+    if node['left']:
+        traverseInOrder(node['left'], arr)
+    arr.append(node['value'])
+    if node['right']:
+        traverseInOrder(node['right'], arr)
+
+    return arr
+
+def traversePreOrder(node, arr):
+    arr.append(node['value'])
+
+    if node['left']:
+        traversePreOrder(node['left'], arr)
+    if node['right']:
+        traversePreOrder(node['right'], arr)
+
+    return arr
+
+def traversePostOrder(node, arr):
+    if node['left']:
+        traversePostOrder(node['left'], arr)
+
+    if node['right']:
+        traversePostOrder(node['right'], arr)
+    arr.append(node['value'])
+
+    return arr
 
 tree = BinarySearchTree()
 tree.insert(9)
@@ -129,6 +200,9 @@ tree.insert(20)
 tree.insert(170)
 tree.insert(15)
 tree.insert(1)
-tree.remove(170)
-print(traverse(tree.root))
+# tree.remove(170)
+# print(tree.DFSPostOrder())
+# print(tree.BFSR([tree.root], []))
+# print(tree.BFS())
+# print(traverse(tree.root))
 # print(tree.lookup(4))
